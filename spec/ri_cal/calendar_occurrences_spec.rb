@@ -516,7 +516,7 @@ TEXT
       }
       
       it {
-        subject.occurrences(starting: DateTime.parse('2016-07-24 10:00:00'), count: 4).map{ |o| [o.dtstart.to_s, o.summary].join(' ') }.should eql([
+        subject.occurrences(starting: DateTime.parse('2016-07-24 10:00:00+02:00'), count: 4).map{ |o| [o.dtstart.to_s, o.summary].join(' ') }.should eql([
           "2016-07-24T10:00:00+02:00  dhr. N. Weeda",
           "2016-07-24T16:30:00+02:00  ds. W. M. van Wijk",
           "2016-07-31T10:00:00+02:00  ds. M. Oppenhuizen",
