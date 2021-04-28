@@ -260,7 +260,7 @@ TEXT
       }
 
       it("should return correct date/times with `starting` set") {
-        subject.occurrences(starting: Time.parse("2016-06-29T11:30:00+02:00"), count: 3).map(&:dtstart).map(&:to_s).should eql(%w(
+        subject.occurrences(starting: DateTime.parse("2016-06-29T11:30:00+02:00"), count: 3).map(&:dtstart).map(&:to_s).should eql(%w(
           2016-07-06T12:00:00+02:00
           2016-07-13T12:00:00+02:00
           2016-07-20T12:00:00+02:00
@@ -428,7 +428,7 @@ TEXT
         ])
       }
       it {
-        subject.occurrences(starting: Time.parse("2016-06-16T20:00:01+02:00"), count: 6).map(&:summary).should eql([
+        subject.occurrences(starting: DateTime.parse("2016-06-16T20:00:01+02:00"), count: 6).map(&:summary).should eql([
             "Test 2", # instance summary
             "Test 3", # instance summary
             "Test Woensdag 18:00", # instance different day, time, summary
@@ -438,7 +438,7 @@ TEXT
         ])
       }
       it {
-        subject.occurrences(starting: Time.parse("2016-06-16T20:00:01+02:00"), before: Time.parse("2016-07-21T20:00:00+02:00")).map(&:summary).should eql([
+        subject.occurrences(starting: DateTime.parse("2016-06-16T20:00:01+02:00"), before: DateTime.parse("2016-07-21T20:00:00+02:00")).map(&:summary).should eql([
             "Test 2", # instance summary
             "Test 3", # instance summary
             "Test Woensdag 18:00", # instance different day, time, summary
@@ -516,7 +516,7 @@ TEXT
       }
       
       it {
-        subject.occurrences(starting: Time.parse('2016-07-24 10:00:00'), count: 4).map{ |o| [o.dtstart.to_s, o.summary].join(' ') }.should eql([
+        subject.occurrences(starting: DateTime.parse('2016-07-24 10:00:00'), count: 4).map{ |o| [o.dtstart.to_s, o.summary].join(' ') }.should eql([
           "2016-07-24T10:00:00+02:00  dhr. N. Weeda",
           "2016-07-24T16:30:00+02:00  ds. W. M. van Wijk",
           "2016-07-31T10:00:00+02:00  ds. M. Oppenhuizen",
@@ -1199,7 +1199,7 @@ TEXT
     subject {
       RiCal.Calendar do |cal|
         cal.event do |event|
-          event.dtstart = Time.parse("2016-06-27T15:00:00+02:00")
+          event.dtstart = DateTime.parse("2016-06-27T15:00:00+02:00")
           event.rrule   = "FREQ=WEEKLY"
         end
       end
@@ -1272,7 +1272,7 @@ TEXT
     its(:events) { should have(2).items }
     it {
       subject.occurrences(
-        starting: Time.parse("2016-09-15 10:59:45 +0200"), count: 3).map(&:dtstart).map(&:to_s).should eql(%w(
+        starting: DateTime.parse("2016-09-15 10:59:45 +0200"), count: 3).map(&:dtstart).map(&:to_s).should eql(%w(
           2016-09-15T11:10:00+02:00
           2016-09-22T10:00:00+02:00
           2016-09-29T10:00:00+02:00

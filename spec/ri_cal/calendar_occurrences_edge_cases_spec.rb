@@ -9,14 +9,14 @@ def generate_calendar(fixtures)
       dtstart, rrule = recurring.split('#')
       event do |e|
         e.uid = uid
-        e.dtstart = Time.parse(dtstart)
+        e.dtstart = DateTime.parse(dtstart)
         e.rrule = rrule if rrule
       end
       overrides.each do |dtfrom, dtto|
         event do |e|
           e.uid = uid
-          e.dtstart = Time.parse(dtto)
-          e.recurrence_id = Time.parse(dtfrom)
+          e.dtstart = DateTime.parse(dtto)
+          e.recurrence_id = DateTime.parse(dtfrom)
         end
       end
     end
@@ -26,7 +26,7 @@ end
 describe RiCal::Component::Calendar do
   
   context "move first override before range" do
-    let(:range) { { starting: Time.parse("2016-06-26"), count: 4 } }
+    let(:range) { { starting: DateTime.parse("2016-06-26"), count: 4 } }
     subject {
       generate_calendar(
         "Jun 26, 2016 16:30:00#FREQ=DAILY" => {
@@ -48,7 +48,7 @@ describe RiCal::Component::Calendar do
   end
   
   context "move last event in range to a later date outside range/count" do
-    let(:range) { { starting: Time.parse("2016-06-27"), count: 4 } }
+    let(:range) { { starting: DateTime.parse("2016-06-27"), count: 4 } }
     subject {
       generate_calendar(
         "Jun 26, 2016 16:30:00#FREQ=DAILY" => {
@@ -71,7 +71,7 @@ describe RiCal::Component::Calendar do
   end
   
   context "move all but last event out of range" do
-    let(:range) { { starting: Time.parse("2016-06-26"), before: Time.parse("2016-07-03") } }
+    let(:range) { { starting: DateTime.parse("2016-06-26"), before: DateTime.parse("2016-07-03") } }
     subject {
       generate_calendar(
         "Jun 26, 2016 16:30:00#FREQ=DAILY" => {
@@ -95,7 +95,7 @@ describe RiCal::Component::Calendar do
   end
   
   context "move overrides into empty range" do
-    let(:range) { { starting: Time.parse("2016-06-26"), before: Time.parse("2016-07-03") } }
+    let(:range) { { starting: DateTime.parse("2016-06-26"), before: DateTime.parse("2016-07-03") } }
     subject {
       generate_calendar(
         "Jul 03, 2016 16:30:00#FREQ=DAILY" => {
@@ -126,7 +126,7 @@ describe RiCal::Component::Calendar do
   end
   
   context "should distinguish coincident events" do
-    let(:range) { { starting: Time.parse("2016-06-26"), count: 8 } }
+    let(:range) { { starting: DateTime.parse("2016-06-26"), count: 8 } }
     subject {
       generate_calendar(
         "Jun 26, 2016 10:00:00#FREQ=DAILY#1" => {
@@ -158,7 +158,7 @@ describe RiCal::Component::Calendar do
   end
   
   context "should return correct next occurrence" do
-    let(:range) { { starting: Time.parse("2016-06-26"), count: 1 } }
+    let(:range) { { starting: DateTime.parse("2016-06-26"), count: 1 } }
     subject {
       generate_calendar(
         "Jun 26, 2016 10:00:00#FREQ=DAILY" => {
