@@ -21,7 +21,7 @@ A Google group for discussion of this library has been set up http://groups.goog
   gem.name          = "ri_cal"
   gem.require_paths = ["lib"]
   gem.version       = RiCal::VERSION
-  gem.required_ruby_version = '>= 1.9.3'
+  gem.required_ruby_version = '>= 2.6.7'
 
   gem.add_dependency 'tzinfo'
 
