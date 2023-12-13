@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-#- 2009 Rick DeNatale, All rights reserved. Refer to the file README.txt for the license
+# - 2009 Rick DeNatale, All rights reserved. Refer to the file README.txt for the license
 require File.join File.dirname(__FILE__), 'lib', 'ri_cal', 'version'
 Gem::Specification.new do |gem|
   gem.authors       = ["Jon Phenow, Rick DeNatale"]
@@ -33,14 +33,5 @@ A Google group for discussion of this library has been set up http://groups.goog
   gem.add_development_dependency 'autotest-standalone'
   gem.add_development_dependency 'autotest-fsevent'
   gem.add_development_dependency 'awesome_print'
-
-  if gem.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
-    gem.specification_version = 3
-
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0')
-    else
-    end
-  else
-  end
+  gem.add_development_dependency 'appraisal'
 end
