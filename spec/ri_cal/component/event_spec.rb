@@ -15,8 +15,8 @@ describe RiCal::Component::Event do
       event.last_modified = result_time_in_zone(2010, 4, 1, 12, 23, 45, "America/New_York", new_york_offset)
       event.to_s.should == "BEGIN:VEVENT
 CREATED;VALUE=DATE-TIME:20100401T132345Z
-DTSTAMP;VALUE=DATE-TIME:20100401T132345Z
 LAST-MODIFIED;VALUE=DATE-TIME:20100401T162345Z
+DTSTAMP;VALUE=DATE-TIME:20100401T132345Z
 END:VEVENT
 "
     end
