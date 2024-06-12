@@ -105,10 +105,35 @@ class RiCal::Component::TZInfoTimezone < RiCal::Component::Timezone
     end
   end
 
+  class TZInfo::DataTimezoneV1Decorator < SimpleDelegator
+    def period_for_utc(arg)
+      TZInfo::TimezonePeriodV1Decorator.new(super(arg))
+    end
+  end
+
+  class TZInfo::TimezonePeriodV1Decorator < SimpleDelegator
+    def local_ends_at
+      __getobj__.respond_to?(:local_ends_at) ? super : __getobj__.local_end
+    end
+    def local_starts_at
+      __getobj__.respond_to?(:local_starts_at) ? super : __getobj__.local_start
+    end
+    def starts_at
+      __getobj__.respond_to?(:starts_at) ? super : __getobj__.utc_start
+    end
+    def ends_at
+      __getobj__.respond_to?(:ends_at) ? super : __getobj__.utc_end
+    end
+  end
+
   attr_reader :tzinfo_timezone #:nodoc:
 
   def initialize(tzinfo_timezone) #:nodoc:
-    @tzinfo_timezone = tzinfo_timezone
+    @tzinfo_timezone = if Object.const_defined?("TZInfo::VERSION") # Available since TZInfo 2.0
+      tzinfo_timezone
+    else
+      TZInfo::DataTimezoneV1Decorator.new(tzinfo_timezone)
+    end
   end
 
   # convert time from this time zone to utc time

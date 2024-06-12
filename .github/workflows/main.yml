@@ -24,6 +24,7 @@ jobs:
           - "3.2"
           - "3.3"
         gemfile:
+          - tzinfo_1_0
           - tzinfo_2_0
           - active_support_6_1
           - active_support_7_0
