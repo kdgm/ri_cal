@@ -1,6 +1,6 @@
 module RiCal
   module Properties #:nodoc:
-    #- ©2009 Rick DeNatale
+    #- 2009 Rick DeNatale
     #- All rights reserved. Refer to the file README.txt for the license
     #
     # Properties::Todo provides property accessing methods for the Todo class
@@ -1423,74 +1423,74 @@ module RiCal
       end
 
       def export_properties_to(export_stream) #:nodoc:
-        export_prop_to(export_stream, "RDATE", @rdate_property)
-        export_prop_to(export_stream, "CONTACT", @contact_property)
-        export_prop_to(export_stream, "COMPLETED", @completed_property)
-        export_prop_to(export_stream, "EXDATE", @exdate_property)
-        export_prop_to(export_stream, "CREATED", @created_property)
-        export_prop_to(export_stream, "DURATION", @duration_property)
-        export_prop_to(export_stream, "STATUS", @status_property)
-        export_prop_to(export_stream, "DTSTART", @dtstart_property)
-        export_prop_to(export_stream, "RECURRENCE-ID", @recurrence_id_property)
-        export_prop_to(export_stream, "DTSTAMP", @dtstamp_property)
-        export_prop_to(export_stream, "RESOURCES", @resources_property)
-        export_prop_to(export_stream, "CATEGORIES", @categories_property)
-        export_prop_to(export_stream, "DUE", @due_property)
-        export_prop_to(export_stream, "LAST-MODIFIED", @last_modified_property)
-        export_prop_to(export_stream, "PRIORITY", @priority_property)
-        export_prop_to(export_stream, "PERCENT-COMPLETE", @percent_complete_property)
-        export_prop_to(export_stream, "GEO", @geo_property)
-        export_prop_to(export_stream, "ATTENDEE", @attendee_property)
-        export_prop_to(export_stream, "UID", @uid_property)
-        export_prop_to(export_stream, "DESCRIPTION", @description_property)
-        export_prop_to(export_stream, "URL", @url_property)
-        export_prop_to(export_stream, "SUMMARY", @summary_property)
-        export_prop_to(export_stream, "ORGANIZER", @organizer_property)
-        export_prop_to(export_stream, "RRULE", @rrule_property)
-        export_prop_to(export_stream, "ATTACH", @attach_property)
         export_prop_to(export_stream, "CLASS", @class_property)
-        export_prop_to(export_stream, "RELATED-TO", @related_to_property)
-        export_prop_to(export_stream, "REQUEST-STATUS", @request_status_property)
-        export_prop_to(export_stream, "EXRULE", @exrule_property)
+        export_prop_to(export_stream, "COMPLETED", @completed_property)
+        export_prop_to(export_stream, "CREATED", @created_property)
+        export_prop_to(export_stream, "DESCRIPTION", @description_property)
+        export_prop_to(export_stream, "DTSTAMP", @dtstamp_property)
+        export_prop_to(export_stream, "DTSTART", @dtstart_property)
+        export_prop_to(export_stream, "GEO", @geo_property)
+        export_prop_to(export_stream, "LAST-MODIFIED", @last_modified_property)
         export_prop_to(export_stream, "LOCATION", @location_property)
-        export_prop_to(export_stream, "COMMENT", @comment_property)
+        export_prop_to(export_stream, "ORGANIZER", @organizer_property)
+        export_prop_to(export_stream, "PERCENT-COMPLETE", @percent_complete_property)
+        export_prop_to(export_stream, "PRIORITY", @priority_property)
+        export_prop_to(export_stream, "RECURRENCE-ID", @recurrence_id_property)
         export_prop_to(export_stream, "SEQUENCE", @sequence_property)
+        export_prop_to(export_stream, "STATUS", @status_property)
+        export_prop_to(export_stream, "SUMMARY", @summary_property)
+        export_prop_to(export_stream, "UID", @uid_property)
+        export_prop_to(export_stream, "URL", @url_property)
+        export_prop_to(export_stream, "DUE", @due_property)
+        export_prop_to(export_stream, "DURATION", @duration_property)
+        export_prop_to(export_stream, "ATTACH", @attach_property)
+        export_prop_to(export_stream, "ATTENDEE", @attendee_property)
+        export_prop_to(export_stream, "CATEGORIES", @categories_property)
+        export_prop_to(export_stream, "COMMENT", @comment_property)
+        export_prop_to(export_stream, "CONTACT", @contact_property)
+        export_prop_to(export_stream, "EXDATE", @exdate_property)
+        export_prop_to(export_stream, "EXRULE", @exrule_property)
+        export_prop_to(export_stream, "REQUEST-STATUS", @request_status_property)
+        export_prop_to(export_stream, "RELATED-TO", @related_to_property)
+        export_prop_to(export_stream, "RESOURCES", @resources_property)
+        export_prop_to(export_stream, "RDATE", @rdate_property)
+        export_prop_to(export_stream, "RRULE", @rrule_property)
       end
 
       def ==(o) #:nodoc:
         if o.class == self.class
-        (rdate_property == o.rdate_property) &&
-        (contact_property == o.contact_property) &&
-        (completed_property == o.completed_property) &&
-        (exdate_property == o.exdate_property) &&
-        (created_property == o.created_property) &&
-        (duration_property == o.duration_property) &&
-        (status_property == o.status_property) &&
-        (dtstart_property == o.dtstart_property) &&
-        (recurrence_id_property == o.recurrence_id_property) &&
-        (dtstamp_property == o.dtstamp_property) &&
-        (resources_property == o.resources_property) &&
-        (categories_property == o.categories_property) &&
-        (due_property == o.due_property) &&
-        (last_modified_property == o.last_modified_property) &&
-        (priority_property == o.priority_property) &&
-        (percent_complete_property == o.percent_complete_property) &&
-        (geo_property == o.geo_property) &&
-        (attendee_property == o.attendee_property) &&
-        (uid_property == o.uid_property) &&
-        (description_property == o.description_property) &&
-        (url_property == o.url_property) &&
-        (summary_property == o.summary_property) &&
-        (organizer_property == o.organizer_property) &&
-        (rrule_property == o.rrule_property) &&
-        (attach_property == o.attach_property) &&
         (class_property == o.class_property) &&
-        (related_to_property == o.related_to_property) &&
-        (request_status_property == o.request_status_property) &&
-        (exrule_property == o.exrule_property) &&
+        (completed_property == o.completed_property) &&
+        (created_property == o.created_property) &&
+        (description_property == o.description_property) &&
+        (dtstamp_property == o.dtstamp_property) &&
+        (dtstart_property == o.dtstart_property) &&
+        (geo_property == o.geo_property) &&
+        (last_modified_property == o.last_modified_property) &&
         (location_property == o.location_property) &&
+        (organizer_property == o.organizer_property) &&
+        (percent_complete_property == o.percent_complete_property) &&
+        (priority_property == o.priority_property) &&
+        (recurrence_id_property == o.recurrence_id_property) &&
+        (sequence_property == o.sequence_property) &&
+        (status_property == o.status_property) &&
+        (summary_property == o.summary_property) &&
+        (uid_property == o.uid_property) &&
+        (url_property == o.url_property) &&
+        (due_property == o.due_property) &&
+        (duration_property == o.duration_property) &&
+        (attach_property == o.attach_property) &&
+        (attendee_property == o.attendee_property) &&
+        (categories_property == o.categories_property) &&
         (comment_property == o.comment_property) &&
-        (sequence_property == o.sequence_property)
+        (contact_property == o.contact_property) &&
+        (exdate_property == o.exdate_property) &&
+        (exrule_property == o.exrule_property) &&
+        (request_status_property == o.request_status_property) &&
+        (related_to_property == o.related_to_property) &&
+        (resources_property == o.resources_property) &&
+        (rdate_property == o.rdate_property) &&
+        (rrule_property == o.rrule_property)
         else
            super
         end
@@ -1498,38 +1498,38 @@ module RiCal
 
       def initialize_copy(o) #:nodoc:
         super
-        rdate_property = rdate_property && rdate_property.dup
-        contact_property = contact_property && contact_property.dup
-        completed_property = completed_property && completed_property.dup
-        exdate_property = exdate_property && exdate_property.dup
-        created_property = created_property && created_property.dup
-        duration_property = duration_property && duration_property.dup
-        status_property = status_property && status_property.dup
-        dtstart_property = dtstart_property && dtstart_property.dup
-        recurrence_id_property = recurrence_id_property && recurrence_id_property.dup
-        dtstamp_property = dtstamp_property && dtstamp_property.dup
-        resources_property = resources_property && resources_property.dup
-        categories_property = categories_property && categories_property.dup
-        due_property = due_property && due_property.dup
-        last_modified_property = last_modified_property && last_modified_property.dup
-        priority_property = priority_property && priority_property.dup
-        percent_complete_property = percent_complete_property && percent_complete_property.dup
-        geo_property = geo_property && geo_property.dup
-        attendee_property = attendee_property && attendee_property.dup
-        uid_property = uid_property && uid_property.dup
-        description_property = description_property && description_property.dup
-        url_property = url_property && url_property.dup
-        summary_property = summary_property && summary_property.dup
-        organizer_property = organizer_property && organizer_property.dup
-        rrule_property = rrule_property && rrule_property.dup
-        attach_property = attach_property && attach_property.dup
         class_property = class_property && class_property.dup
-        related_to_property = related_to_property && related_to_property.dup
-        request_status_property = request_status_property && request_status_property.dup
-        exrule_property = exrule_property && exrule_property.dup
+        completed_property = completed_property && completed_property.dup
+        created_property = created_property && created_property.dup
+        description_property = description_property && description_property.dup
+        dtstamp_property = dtstamp_property && dtstamp_property.dup
+        dtstart_property = dtstart_property && dtstart_property.dup
+        geo_property = geo_property && geo_property.dup
+        last_modified_property = last_modified_property && last_modified_property.dup
         location_property = location_property && location_property.dup
-        comment_property = comment_property && comment_property.dup
+        organizer_property = organizer_property && organizer_property.dup
+        percent_complete_property = percent_complete_property && percent_complete_property.dup
+        priority_property = priority_property && priority_property.dup
+        recurrence_id_property = recurrence_id_property && recurrence_id_property.dup
         sequence_property = sequence_property && sequence_property.dup
+        status_property = status_property && status_property.dup
+        summary_property = summary_property && summary_property.dup
+        uid_property = uid_property && uid_property.dup
+        url_property = url_property && url_property.dup
+        due_property = due_property && due_property.dup
+        duration_property = duration_property && duration_property.dup
+        attach_property = attach_property && attach_property.dup
+        attendee_property = attendee_property && attendee_property.dup
+        categories_property = categories_property && categories_property.dup
+        comment_property = comment_property && comment_property.dup
+        contact_property = contact_property && contact_property.dup
+        exdate_property = exdate_property && exdate_property.dup
+        exrule_property = exrule_property && exrule_property.dup
+        request_status_property = request_status_property && request_status_property.dup
+        related_to_property = related_to_property && related_to_property.dup
+        resources_property = resources_property && resources_property.dup
+        rdate_property = rdate_property && rdate_property.dup
+        rrule_property = rrule_property && rrule_property.dup
       end
 
       def add_date_times_to(required_timezones) #:nodoc:
@@ -1542,7 +1542,7 @@ module RiCal
 
       module ClassMethods #:nodoc:
         def property_parser #:nodoc:
-          {"RDATE"=>:rdate_property_from_string, "COMMENT"=>:comment_property_from_string, "LOCATION"=>:location_property_from_string, "CONTACT"=>:contact_property_from_string, "URL"=>:url_property_from_string, "RECURRENCE-ID"=>:recurrence_id_property_from_string, "LAST-MODIFIED"=>:last_modified_property_from_string, "COMPLETED"=>:completed_property_from_string, "CLASS"=>:class_property_from_string, "EXDATE"=>:exdate_property_from_string, "UID"=>:uid_property_from_string, "SEQUENCE"=>:sequence_property_from_string, "PERCENT-COMPLETE"=>:percent_complete_property_from_string, "EXRULE"=>:exrule_property_from_string, "ATTENDEE"=>:attendee_property_from_string, "ORGANIZER"=>:organizer_property_from_string, "GEO"=>:geo_property_from_string, "RRULE"=>:rrule_property_from_string, "RESOURCES"=>:resources_property_from_string, "ATTACH"=>:attach_property_from_string, "CATEGORIES"=>:categories_property_from_string, "SUMMARY"=>:summary_property_from_string, "PRIORITY"=>:priority_property_from_string, "DESCRIPTION"=>:description_property_from_string, "RELATED-TO"=>:related_to_property_from_string, "REQUEST-STATUS"=>:request_status_property_from_string, "DURATION"=>:duration_property_from_string, "DUE"=>:due_property_from_string, "STATUS"=>:status_property_from_string, "DTSTART"=>:dtstart_property_from_string, "DTSTAMP"=>:dtstamp_property_from_string, "CREATED"=>:created_property_from_string}
+          {"CLASS"=>:class_property_from_string, "COMPLETED"=>:completed_property_from_string, "CREATED"=>:created_property_from_string, "DESCRIPTION"=>:description_property_from_string, "DTSTAMP"=>:dtstamp_property_from_string, "DTSTART"=>:dtstart_property_from_string, "GEO"=>:geo_property_from_string, "LAST-MODIFIED"=>:last_modified_property_from_string, "LOCATION"=>:location_property_from_string, "ORGANIZER"=>:organizer_property_from_string, "PERCENT-COMPLETE"=>:percent_complete_property_from_string, "PRIORITY"=>:priority_property_from_string, "RECURRENCE-ID"=>:recurrence_id_property_from_string, "SEQUENCE"=>:sequence_property_from_string, "STATUS"=>:status_property_from_string, "SUMMARY"=>:summary_property_from_string, "UID"=>:uid_property_from_string, "URL"=>:url_property_from_string, "DUE"=>:due_property_from_string, "DURATION"=>:duration_property_from_string, "ATTACH"=>:attach_property_from_string, "ATTENDEE"=>:attendee_property_from_string, "CATEGORIES"=>:categories_property_from_string, "COMMENT"=>:comment_property_from_string, "CONTACT"=>:contact_property_from_string, "EXDATE"=>:exdate_property_from_string, "EXRULE"=>:exrule_property_from_string, "REQUEST-STATUS"=>:request_status_property_from_string, "RELATED-TO"=>:related_to_property_from_string, "RESOURCES"=>:resources_property_from_string, "RDATE"=>:rdate_property_from_string, "RRULE"=>:rrule_property_from_string}
         end
       end
 

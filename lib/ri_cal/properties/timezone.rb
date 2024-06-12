@@ -1,6 +1,6 @@
 module RiCal
   module Properties #:nodoc:
-    #- ©2009 Rick DeNatale
+    #- 2009 Rick DeNatale
     #- All rights reserved. Refer to the file README.txt for the license
     #
     # Properties::Timezone provides property accessing methods for the Timezone class
@@ -107,16 +107,16 @@ module RiCal
 
 
       def export_properties_to(export_stream) #:nodoc:
-        export_prop_to(export_stream, "TZURL", @tzurl_property)
-        export_prop_to(export_stream, "LAST-MODIFIED", @last_modified_property)
         export_prop_to(export_stream, "TZID", @tzid_property)
+        export_prop_to(export_stream, "LAST-MODIFIED", @last_modified_property)
+        export_prop_to(export_stream, "TZURL", @tzurl_property)
       end
 
       def ==(o) #:nodoc:
         if o.class == self.class
-        (tzurl_property == o.tzurl_property) &&
+        (tzid_property == o.tzid_property) &&
         (last_modified_property == o.last_modified_property) &&
-        (tzid_property == o.tzid_property)
+        (tzurl_property == o.tzurl_property)
         else
            super
         end
@@ -124,9 +124,9 @@ module RiCal
 
       def initialize_copy(o) #:nodoc:
         super
-        tzurl_property = tzurl_property && tzurl_property.dup
-        last_modified_property = last_modified_property && last_modified_property.dup
         tzid_property = tzid_property && tzid_property.dup
+        last_modified_property = last_modified_property && last_modified_property.dup
+        tzurl_property = tzurl_property && tzurl_property.dup
       end
 
       def add_date_times_to(required_timezones) #:nodoc:
@@ -134,7 +134,7 @@ module RiCal
 
       module ClassMethods #:nodoc:
         def property_parser #:nodoc:
-          {"TZURL"=>:tzurl_property_from_string, "TZID"=>:tzid_property_from_string, "LAST-MODIFIED"=>:last_modified_property_from_string}
+          {"TZID"=>:tzid_property_from_string, "LAST-MODIFIED"=>:last_modified_property_from_string, "TZURL"=>:tzurl_property_from_string}
         end
       end
 

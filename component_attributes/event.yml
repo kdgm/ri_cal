@@ -1,7 +1,7 @@
 - class
 - created
 - description
-- dtstart 
+- dtstart
 - geo
 - last-modified
 - location
@@ -16,30 +16,30 @@
 - url
 - recurrence-id
 - dtend:
-    conflicts_with: duration
+    conflicts_with: [duration]
 - duration:
-    conflicts_with: dtend
+    conflicts_with: [dtend]
 - attach:
-    multi: *
+    multi: "*"
 - attendee:
-    multi: *
+    multi: "*"
 - categories:
-    multi: *
+    multi: "*"
 - comment:
-    multi: *
+    multi: "*"
 - contact:
-    multi: *
+    multi: "*"
 - exdate:
-    multi: *
+    multi: "*"
 - rdate:
-    multi: *
+    multi: "*"
 - exrule:
-    multi: *
+    multi: "*"
 - request-status:
-    multi: *
+    multi: "*"
 - related-to:
-    multi: *
+    multi: "*"
 - resources:
-    multi: *
+    multi: "*"
 - rrule:
-    multi: *
+    multi: "*"

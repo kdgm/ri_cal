@@ -2,10 +2,10 @@
 - tzoffsetto
 - tzoffsetfrom
 - comment:
-    multi: *
+    multi: "*"
 - rdate:
-    multi: *
+    multi: "*"
 - rrule:
-    multi: *
+    multi: "*"
 - tzname:
-    multi: *
+    multi: "*"
