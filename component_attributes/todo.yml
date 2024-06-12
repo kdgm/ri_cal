@@ -17,30 +17,30 @@
 - uid
 - url
 - due:
-    conflicts_with: duration
+    conflicts_with: [duration]
 - duration:
-    conflicts_with: due
+    conflicts_with: [due]
 - attach:
-    multi: *
+    multi: "*"
 - attendee:
-    multi: *
+    multi: "*"
 - categories:
-    multi: *
+    multi: "*"
 - comment:
-    multi: *
+    multi: "*"
 - contact:
-    multi: *
+    multi: "*"
 - exdate:
-    multi: *
+    multi: "*"
 - exrule:
-    multi: *
+    multi: "*"
 - request-status:
-    multi: *
+    multi: "*"
 - related-to:
-    multi: *
+    multi: "*"
 - resources:
-    multi: *
+    multi: "*"
 - rdate:
-    multi: *
+    multi: "*"
 - rrule:
-    multi: *
+    multi: "*"

@@ -1,6 +1,6 @@
 module RiCal
   module Properties #:nodoc:
-    #- ©2009 Rick DeNatale
+    #- 2009 Rick DeNatale
     #- All rights reserved. Refer to the file README.txt for the license
     #
     # Properties::Journal provides property accessing methods for the Journal class
@@ -1127,58 +1127,58 @@ module RiCal
       end
 
       def export_properties_to(export_stream) #:nodoc:
-        export_prop_to(export_stream, "RDATE", @rdate_property)
+        export_prop_to(export_stream, "CLASS", @class_property)
+        export_prop_to(export_stream, "CREATED", @created_property)
+        export_prop_to(export_stream, "DESCRIPTION", @description_property)
+        export_prop_to(export_stream, "DTSTART", @dtstart_property)
+        export_prop_to(export_stream, "DTSTAMP", @dtstamp_property)
+        export_prop_to(export_stream, "LAST-MODIFIED", @last_modified_property)
+        export_prop_to(export_stream, "ORGANIZER", @organizer_property)
+        export_prop_to(export_stream, "RECURRENCE-ID", @recurrence_id_property)
+        export_prop_to(export_stream, "SEQUENCE", @sequence_property)
+        export_prop_to(export_stream, "STATUS", @status_property)
+        export_prop_to(export_stream, "SUMMARY", @summary_property)
+        export_prop_to(export_stream, "UID", @uid_property)
+        export_prop_to(export_stream, "URL", @url_property)
+        export_prop_to(export_stream, "ATTACH", @attach_property)
+        export_prop_to(export_stream, "ATTENDEE", @attendee_property)
+        export_prop_to(export_stream, "CATEGORIES", @categories_property)
+        export_prop_to(export_stream, "COMMENT", @comment_property)
         export_prop_to(export_stream, "CONTACT", @contact_property)
         export_prop_to(export_stream, "EXDATE", @exdate_property)
-        export_prop_to(export_stream, "CREATED", @created_property)
-        export_prop_to(export_stream, "STATUS", @status_property)
-        export_prop_to(export_stream, "DTSTART", @dtstart_property)
-        export_prop_to(export_stream, "RECURRENCE-ID", @recurrence_id_property)
-        export_prop_to(export_stream, "DTSTAMP", @dtstamp_property)
-        export_prop_to(export_stream, "CATEGORIES", @categories_property)
-        export_prop_to(export_stream, "LAST-MODIFIED", @last_modified_property)
-        export_prop_to(export_stream, "ATTENDEE", @attendee_property)
-        export_prop_to(export_stream, "UID", @uid_property)
-        export_prop_to(export_stream, "DESCRIPTION", @description_property)
-        export_prop_to(export_stream, "URL", @url_property)
-        export_prop_to(export_stream, "SUMMARY", @summary_property)
-        export_prop_to(export_stream, "ORGANIZER", @organizer_property)
-        export_prop_to(export_stream, "RRULE", @rrule_property)
-        export_prop_to(export_stream, "ATTACH", @attach_property)
-        export_prop_to(export_stream, "CLASS", @class_property)
-        export_prop_to(export_stream, "REQUEST-STATUS", @request_status_property)
-        export_prop_to(export_stream, "RELATED-TO", @related_to_property)
         export_prop_to(export_stream, "EXRULE", @exrule_property)
-        export_prop_to(export_stream, "COMMENT", @comment_property)
-        export_prop_to(export_stream, "SEQUENCE", @sequence_property)
+        export_prop_to(export_stream, "RELATED-TO", @related_to_property)
+        export_prop_to(export_stream, "RDATE", @rdate_property)
+        export_prop_to(export_stream, "RRULE", @rrule_property)
+        export_prop_to(export_stream, "REQUEST-STATUS", @request_status_property)
       end
 
       def ==(o) #:nodoc:
         if o.class == self.class
-        (rdate_property == o.rdate_property) &&
+        (class_property == o.class_property) &&
+        (created_property == o.created_property) &&
+        (description_property == o.description_property) &&
+        (dtstart_property == o.dtstart_property) &&
+        (dtstamp_property == o.dtstamp_property) &&
+        (last_modified_property == o.last_modified_property) &&
+        (organizer_property == o.organizer_property) &&
+        (recurrence_id_property == o.recurrence_id_property) &&
+        (sequence_property == o.sequence_property) &&
+        (status_property == o.status_property) &&
+        (summary_property == o.summary_property) &&
+        (uid_property == o.uid_property) &&
+        (url_property == o.url_property) &&
+        (attach_property == o.attach_property) &&
+        (attendee_property == o.attendee_property) &&
+        (categories_property == o.categories_property) &&
+        (comment_property == o.comment_property) &&
         (contact_property == o.contact_property) &&
         (exdate_property == o.exdate_property) &&
-        (created_property == o.created_property) &&
-        (status_property == o.status_property) &&
-        (dtstart_property == o.dtstart_property) &&
-        (recurrence_id_property == o.recurrence_id_property) &&
-        (dtstamp_property == o.dtstamp_property) &&
-        (categories_property == o.categories_property) &&
-        (last_modified_property == o.last_modified_property) &&
-        (attendee_property == o.attendee_property) &&
-        (uid_property == o.uid_property) &&
-        (description_property == o.description_property) &&
-        (url_property == o.url_property) &&
-        (summary_property == o.summary_property) &&
-        (organizer_property == o.organizer_property) &&
-        (rrule_property == o.rrule_property) &&
-        (attach_property == o.attach_property) &&
-        (class_property == o.class_property) &&
-        (request_status_property == o.request_status_property) &&
-        (related_to_property == o.related_to_property) &&
         (exrule_property == o.exrule_property) &&
-        (comment_property == o.comment_property) &&
-        (sequence_property == o.sequence_property)
+        (related_to_property == o.related_to_property) &&
+        (rdate_property == o.rdate_property) &&
+        (rrule_property == o.rrule_property) &&
+        (request_status_property == o.request_status_property)
         else
            super
         end
@@ -1186,30 +1186,30 @@ module RiCal
 
       def initialize_copy(o) #:nodoc:
         super
-        rdate_property = rdate_property && rdate_property.dup
+        class_property = class_property && class_property.dup
+        created_property = created_property && created_property.dup
+        description_property = description_property && description_property.dup
+        dtstart_property = dtstart_property && dtstart_property.dup
+        dtstamp_property = dtstamp_property && dtstamp_property.dup
+        last_modified_property = last_modified_property && last_modified_property.dup
+        organizer_property = organizer_property && organizer_property.dup
+        recurrence_id_property = recurrence_id_property && recurrence_id_property.dup
+        sequence_property = sequence_property && sequence_property.dup
+        status_property = status_property && status_property.dup
+        summary_property = summary_property && summary_property.dup
+        uid_property = uid_property && uid_property.dup
+        url_property = url_property && url_property.dup
+        attach_property = attach_property && attach_property.dup
+        attendee_property = attendee_property && attendee_property.dup
+        categories_property = categories_property && categories_property.dup
+        comment_property = comment_property && comment_property.dup
         contact_property = contact_property && contact_property.dup
         exdate_property = exdate_property && exdate_property.dup
-        created_property = created_property && created_property.dup
-        status_property = status_property && status_property.dup
-        dtstart_property = dtstart_property && dtstart_property.dup
-        recurrence_id_property = recurrence_id_property && recurrence_id_property.dup
-        dtstamp_property = dtstamp_property && dtstamp_property.dup
-        categories_property = categories_property && categories_property.dup
-        last_modified_property = last_modified_property && last_modified_property.dup
-        attendee_property = attendee_property && attendee_property.dup
-        uid_property = uid_property && uid_property.dup
-        description_property = description_property && description_property.dup
-        url_property = url_property && url_property.dup
-        summary_property = summary_property && summary_property.dup
-        organizer_property = organizer_property && organizer_property.dup
-        rrule_property = rrule_property && rrule_property.dup
-        attach_property = attach_property && attach_property.dup
-        class_property = class_property && class_property.dup
-        request_status_property = request_status_property && request_status_property.dup
-        related_to_property = related_to_property && related_to_property.dup
         exrule_property = exrule_property && exrule_property.dup
-        comment_property = comment_property && comment_property.dup
-        sequence_property = sequence_property && sequence_property.dup
+        related_to_property = related_to_property && related_to_property.dup
+        rdate_property = rdate_property && rdate_property.dup
+        rrule_property = rrule_property && rrule_property.dup
+        request_status_property = request_status_property && request_status_property.dup
       end
 
       def add_date_times_to(required_timezones) #:nodoc:
@@ -1221,7 +1221,7 @@ module RiCal
 
       module ClassMethods #:nodoc:
         def property_parser #:nodoc:
-          {"RDATE"=>:rdate_property_from_string, "COMMENT"=>:comment_property_from_string, "CONTACT"=>:contact_property_from_string, "URL"=>:url_property_from_string, "RECURRENCE-ID"=>:recurrence_id_property_from_string, "LAST-MODIFIED"=>:last_modified_property_from_string, "CLASS"=>:class_property_from_string, "EXDATE"=>:exdate_property_from_string, "UID"=>:uid_property_from_string, "SEQUENCE"=>:sequence_property_from_string, "EXRULE"=>:exrule_property_from_string, "ATTENDEE"=>:attendee_property_from_string, "ORGANIZER"=>:organizer_property_from_string, "RRULE"=>:rrule_property_from_string, "ATTACH"=>:attach_property_from_string, "CATEGORIES"=>:categories_property_from_string, "SUMMARY"=>:summary_property_from_string, "DESCRIPTION"=>:description_property_from_string, "REQUEST-STATUS"=>:request_status_property_from_string, "RELATED-TO"=>:related_to_property_from_string, "STATUS"=>:status_property_from_string, "DTSTART"=>:dtstart_property_from_string, "DTSTAMP"=>:dtstamp_property_from_string, "CREATED"=>:created_property_from_string}
+          {"CLASS"=>:class_property_from_string, "CREATED"=>:created_property_from_string, "DESCRIPTION"=>:description_property_from_string, "DTSTART"=>:dtstart_property_from_string, "DTSTAMP"=>:dtstamp_property_from_string, "LAST-MODIFIED"=>:last_modified_property_from_string, "ORGANIZER"=>:organizer_property_from_string, "RECURRENCE-ID"=>:recurrence_id_property_from_string, "SEQUENCE"=>:sequence_property_from_string, "STATUS"=>:status_property_from_string, "SUMMARY"=>:summary_property_from_string, "UID"=>:uid_property_from_string, "URL"=>:url_property_from_string, "ATTACH"=>:attach_property_from_string, "ATTENDEE"=>:attendee_property_from_string, "CATEGORIES"=>:categories_property_from_string, "COMMENT"=>:comment_property_from_string, "CONTACT"=>:contact_property_from_string, "EXDATE"=>:exdate_property_from_string, "EXRULE"=>:exrule_property_from_string, "RELATED-TO"=>:related_to_property_from_string, "RDATE"=>:rdate_property_from_string, "RRULE"=>:rrule_property_from_string, "REQUEST-STATUS"=>:request_status_property_from_string}
         end
       end
 

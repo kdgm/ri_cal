@@ -5,6 +5,6 @@
 - repeat
 - summary
 - attendee:
-    multi: *
+    multi: "*"
 - attach:
-    multi: *
+    multi: "*"

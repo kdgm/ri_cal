@@ -1,7 +1,7 @@
 - class
 - created
 - description
-- dtstart 
+- dtstart
 - dtstamp
 - last-modified
 - organizer
@@ -12,24 +12,24 @@
 - uid
 - url
 - attach:
-    multi: *
+    multi: "*"
 - attendee:
-    multi: *
+    multi: "*"
 - categories:
-    multi: *
+    multi: "*"
 - comment:
-    multi: *
+    multi: "*"
 - contact:
-    multi: *
+    multi: "*"
 - exdate:
-    multi: *
+    multi: "*"
 - exrule:
-    multi: *
+    multi: "*"
 - related-to:
-    multi: *
+    multi: "*"
 - rdate:
-    multi: *
+    multi: "*"
 - rrule:
-    multi: *
+    multi: "*"
 - request-status:
-    multi: *
+    multi: "*"

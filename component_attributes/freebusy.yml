@@ -1,5 +1,5 @@
 - contact
-- dtstart 
+- dtstart
 - dtend
 - duration
 - dtstamp
@@ -7,10 +7,10 @@
 - uid
 - url
 - attendee:
-    multi: *
+    multi: "*"
 - comment:
-    multi: *
+    multi: "*"
 - freebusy:
-    multi: *
+    multi: "*"
 - request-status:
-    multi: *
+    multi: "*"
