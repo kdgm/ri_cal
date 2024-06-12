@@ -1,29 +1,12 @@
 # Kerkdienstgemist.nl version of `RiCal`
 
-## RI_CAL -- a new implementation of RFC2445 in Ruby
+## RI_CAL -- a implementation of `RFC2445` in Ruby
 
-[![TravisCI](https://secure.travis-ci.org/jphenow/ri_cal.png "TravisCI")](http://travis-ci.org/jphenow/ri_cal "Travis-CI RiCal")
-
-[RubyGems NOT YET]()
-
-by Jon Phenow
 Forked from https://github.com/rubyredrick/ri_cal
-
-### WARNING
-
-I (Jon Phenow) have only recently forked this and am in the process of cleaning and rewriting.
-Please be **aware** that some of this README may be out of date.
 
 ## DESCRIPTION:
 
-A new Ruby implementation of RFC2445 iCalendar.
-
-The existing Ruby iCalendar libraries (e.g. icalendar, vpim) provide for parsing and generating icalendar files,
-but do not support important things like enumerating occurrences of repeating events.
-
-This is a clean-slate implementation of RFC2445.
-
-A Google group for discussion of this library has been set up http://groups.google.com/group/rical_gem
+This is a clean-slate implementation of `RFC2445` iCalendar.
 
 ## FEATURES/PROBLEMS:
 
@@ -31,22 +14,15 @@ A Google group for discussion of this library has been set up http://groups.goog
 
 ### Components and properties
 
-An iCalendar calendar comprises subcomponents like Events, Timezones and Todos. Each component may
-have properties, for example an event has a dtstart property which defines the time (and date) on
-which the event starts.
+An `iCalendar` calendar comprises subcomponents like `Events`, `Timezones` and `Todos`. Each component may have properties, for example an event has a `dtstart` property which defines the time (and date) on which the event starts.
 
-RiCal components will provide reasonable ruby objects as the values of these properties, and allow
-the properties to be set to ruby objects which are reasonable for the particular property. For
-example time properties like dtstart can be set to a ruby Time, DateTime or Date object, and will
-return a DateTime or Date object when queried.
+`RiCal` components will provide reasonable ruby objects as the values of these properties, and allow the properties to be set to ruby objects which are reasonable for the particular property. For example time properties like `dtstart` can be set to a ruby `Time`, `DateTime` or `Date` object, and will return a `DateTime` or `Date` object when queried.
 
-The methods for accessing the properties of each type of component are defined in a module with the
-same name as the component class in the RiCal::properties module. For example the property
-accessing methods for RiCal::Component::Event are defined in RiCal::Properties::Event
+The methods for accessing the properties of each type of component are defined in a module with the same name as the component class in the `RiCal::properties` module. For example the property accessing methods for `RiCal::Component::Event` are defined in `iCal::Properties::Event`
 
 ### Creating Calendars and Calendar Components
 
-RiCal provides a builder DSL for creating calendars and calendar components. An example
+`RiCal` provides a builder DSL for creating calendars and calendar components. An example
 
 ```ruby
 RiCal.Calendar do
@@ -63,14 +39,9 @@ RiCal.Calendar do
 end
 ```
 
-This style is for compatibility with the iCalendar and vpim to ease migration. The downside is that
-the block is evaluated in the context of a different object which can cause surprises if the block
-contains direct instance variable references or implicit references to self. Note that, in this
-style, one must use 'declarative' method calls like dtstart to set values rather than more natural
-attribute writer methods, like dtstart=
+This style is for compatibility with the `iCalendar` and `vpim` to ease migration. The downside is that the block is evaluated in the context of a different object which can cause surprises if the block contains direct instance variable references or implicit references to self. Note that, in this style, one must use 'declarative' method calls like `dtstart` to set values rather than more natural attribute writer methods, like `dtstart=`
 
-Alternatively you can pass a block with a single argument, in this case the component being built
-will be passed as that argument
+Alternatively you can pass a block with a single argument, in this case the component being built will be passed as that argument
 
 ```ruby
 RiCal.Calendar do |cal|
@@ -87,22 +58,15 @@ RiCal.Calendar do |cal|
 end
 ```
 
-As the example shows, the two styles can be mixed, the inner block which builds the alarm uses the
-first style.
+As the example shows, the two styles can be mixed, the inner block which builds the alarm uses the first style.
 
-The blocks are evaluated in the context of an object which builds the calendar or calendar
-component. method names starting with add_ or remove_ are sent to the component, method names which
-correspond to a property value setter of the object being built will cause that setter to be sent
-to the component with the provided value.
+The blocks are evaluated in the context of an object which builds the calendar or calendar component. method names starting with `add_` or `remove_` are sent to the component, method names which correspond to a property value setter of the object being built will cause that setter to be sent to the component with the provided value.
 
-A method corresponding to the name of one of the components sub component will create the sub
-component and evaluate a block if given in the context of the new subcomponent.
+A method corresponding to the name of one of the components sub component will create the sub component and evaluate a block if given in the context of the new subcomponent.
 
 #### Multiply occurring properties
 
-Certain RFC Components have properties which may be specified multiple times, for example, an Event
-may have zero or more comment properties, A component will have a family of methods for
-building/manipulating such a property, e.g.
+Certain RFC Components have properties which may be specified multiple times, for example, an `Event` may have zero or more comment properties, A component will have a family of methods for building/manipulating such a property, e.g.
 
 ```ruby
 Event#comment           # will return an array of comment strings.
@@ -116,74 +80,58 @@ Event#remove_comments   # takes multiple comment string argument and removes an 
 
 #### Times, Time zones, and Floating Times
 
-RFC2445 describes three different kinds of DATE-TIME values with respect to time zones:
+`RFC2445` describes three different kinds of `DATE-TIME` values with respect to time zones:
 
-1. date-times with a local time. These have no actual time zone, instead they are to be
-interpreted in the local time zone of the viewer.  These floating times are used for things
-like the New Years celebration which is observed at local midnight whether you happen to be
-in Paris, London, or New York.
+1. date-times with a local time. These have no actual time zone, instead they are to be interpreted in the local time zone of the viewer.  These floating times are used for things like the New Years celebration which is observed at local midnight whether you happen to be in Paris, London, or New York.
 
-2. date-times with UTC time.  An application would either display these with an indication of
-the time zone, or convert them to the viewer's time zone, perhaps depending on user settings.
+2. date-times with `UTC` time.  An application would either display these with an indication of the time zone, or convert them to the viewer's time zone, perhaps depending on user settings.
 
 3. date-times with a specified time zone.
 
-RiCal can be given ruby Time, DateTime, or Date objects for the value of properties requiring an
-iCalendar DATE-TIME value.  It can also be given a string
+`RiCal` can be given ruby `Time`, `DateTime`, or `Date` objects for the value of properties requiring an `iCalendar` `DATE-TIME` value.  It can also be given a string
 
-Note that a date only DATE-TIME value has no time zone by definition, effectively such values float
-and describe a date as viewed by the user in his/her local time zone.
+Note that a date only `DATE-TIME` value has no time zone by definition, effectively such values float and describe a date as viewed by the user in his/her local time zone.
 
-When a Ruby Time or DateTime instance is used to set properties with with a DATE-TIME value, it
-needs to determine which of the three types it represents. RiCal is designed to make use of the
-TimeWithZone support which has been part of the ActiveSupport component of Ruby on Rails since
-Rails 2.2. However it's been carefully designed not to require Rails or ActiveSupport, but to
-dynamically detect the presence of the TimeWithZone support.
+When a Ruby `Time` or `DateTime` instance is used to set properties with with a `DATE-TIME` value, it needs to determine which of the three types it represents. `RiCal` is designed to make use of the `TimeWithZone` support which has been part of the `ActiveSupport` component of `Ruby on Rails` since `Rails 2.2`. However it's been carefully designed not to require `Rails` or `ActiveSupport`, but to dynamically detect the presence of the `TimeWithZone` support.
 
-RiCal adds accessor methods for a tzid attribute to the Ruby Time, and DateTime classes as well as
-a set_tzid method which sets the tzid attribute and returns the receiver for convenience in
-building calendars. If ActiveSupport::TimeWithZone is defined, a tzid instance method is defined
-which returns the identifier of the time zone.
+`RiCal` adds accessor methods for a `tzid` attribute to the Ruby `Time`, and `DateTime` classes as well as a `set_tzid` method which sets the `tzid` attribute and returns the receiver for convenience in building calendars. If `ActiveSupport::TimeWithZone` is defined, a `tzid` instance method is defined which returns the identifier of the time zone.
 
-When the value of a DATE-TIME property is set to a value, the following processing occurs:
+When the value of a `DATE-TIME` property is set to a value, the following processing occurs:
 
-* If the value is a string, then it must be a valid rfc 2445 date or datetime string optionally
+* If the value is a string, then it must be a valid `RFC2445` `date` or `datetime` string optionally
 preceded by a parameter specification e.g
 
-`20010911`  will be interpreted as a date
+  * `20010911`  will be interpreted as a date
+  * `20090530T123000Z`  will be interpreted as the time May 30, 2009 at 12:30:00 UTC
+  * `20090530T123000`  will be interpreted as the time May 30, 2009 with a floating time zone
+  * `TZID=America/New_York:20090530T123000`  will be interpreted as the time May 30, 2009 in the time zone identified by "America/New_York"
 
-`20090530T123000Z`  will be interpreted as the time May 30, 2009 at 12:30:00 UTC
+* If the value is a `Date` it will be interpreted as that date
+* If the value is a `Time`, `DateTime`, or `TimeWithZone` then the `tzid` attribute will determine the
+time zone. If `tzid` returns nil then the default `tzid` will be used.
 
-`20090530T123000`  will be interpreted as the time May 30, 2009 with a floating time zone
+#### Default `TZID`
 
-`TZID=America/New_York:20090530T123000`  will be interpreted as the time May 30, 2009 in the time zone identified by "America/New_York"
+The `PropertyValue::DateTime` class has a `default_tzid` attribute which is initialized to `UTC`.
 
-* If the value is a Date it will be interpreted as that date
-* If the value is a Time, DateTime, or TimeWithZone then the tzid attribute will determine the
-time zone. If tzid returns nil then the default tzid will be used.
+The `Component::Calendar` class also has a `default_tzid` attribute, which may be set, but if it is not
+set the `default_tzid` of the `PropertyValue::DateTime` class will be used.
 
-#### Default TZID
+To set the interpreting of `Time`s and `DateTime`s which have no `tzid` as floating times, set the
+`default_tzid` for `Component::Calendar` and/or `PropertyValue::DateTime` to `:floating`.
 
-The PropertyValue::DateTime class has a default_tzid attribute which is initialized to "UTC".
-
-The Component::Calendar class also has a default_tzid attribute, which may be set, but if it is not
-set the default_tzid of the PropertyValue::DateTime class will be used.
-
-To set the interpreting of Times and DateTimes which have no tzid as floating times, set the
-default_tzid for Component::Calendar and/or PropertyValue::DateTime to :floating.
-
-Also note that time zone identifiers are not standardized by RFC 2445. For an RiCal originated
-calendar time zone identifiers recognized by the TZInfo gem, or the TZInfo implementation provided
-by ActiveSupport as the case may be may be used. The valid time zone identifiers for a non-RiCal
-generated calendar imported into RiCalendar are determined by the VTIMEZONE compoents within the
+Also note that time zone identifiers are not standardized by `RFC2445`. For an `RiCal` originated
+calendar time zone identifiers recognized by the `TZInfo` gem, or the `TZInfo` implementation provided
+by `ActiveSupport` as the case may be may be used. The valid time zone identifiers for a non-`RiCal`
+generated calendar imported into `RiCalendar` are determined by the `VTIMEZONE` compoents within the
 imported calendar.
 
 If you use a timezone identifer within a calendar which is not defined within the calendar it will
-detected at the time you try to convert a timezone. In this case an InvalidTimezoneIdentifier error
+detected at the time you try to convert a timezone. In this case an `InvalidTimezoneIdentifier` error
 will be raised by the conversion method.
 
-To explicitly set a floating time you can use the method #with_floating_timezone on Time or
-DateTime instances as in
+To explicitly set a floating time you can use the method `#with_floating_timezone` on `Time` or
+`DateTime` instances as in
 
 ```ruby
 event.dtstart = Time.parse("1/1/2010 00:00:00").with_floating_timezone
@@ -419,11 +367,12 @@ For more info: https://github.com/thoughtbot/appraisal
 
 ### From github / source
 
-1. cd to a directory in which you want to install ri_cal as a subdirectory
-2. git clone https://github.com/kdgm/ri_cal  your_install_subdirectory
-3. cd your_install_directory
-4. rake spec
-5. rake install_gem
+```shell
+git clone https://github.com/kdgm/ri_cal
+cd ri_cal
+rake spec
+rake install
+```
 
 ## LICENSE:
 
