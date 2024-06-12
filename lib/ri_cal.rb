@@ -2,6 +2,26 @@
 #
 # The RiCal module provides the outermost namespace, along with several convenience methods for parsing
 # and building calendars and calendar components.
+module UtcToLocalReturnsUtcOffsetTimes
+  def utc_to_local(time)
+    super.yield_self do |t|
+      throw "\nutc_to_local: %s <-> %s" % [t, time]
+      if Object.const_defined?(:ActiveSupport)
+        ActiveSupport.utc_to_local_returns_utc_offset_times ?
+          t : Time.utc(t.year, t.month, t.day, t.hour, t.min, t.sec, t.sec_fraction)
+      else
+        t
+      end
+    end
+  end
+end
+
+require 'tzinfo'
+
+class TZInfo::Timezone
+  prepend UtcToLocalReturnsUtcOffsetTimes
+end
+
 module RiCal
   require 'stringio'
   require 'rational'
