@@ -1,3 +1,7 @@
+appraise "tzinfo_1_0" do
+  gem "tzinfo", "~> 1"
+end
+
 appraise "tzinfo_2_0" do
   gem "tzinfo", "~> 2"
 end
