@@ -1,13 +1,13 @@
 # encoding: utf-8
 
-require File.join(File.dirname(__FILE__), %w[.. spec_helper])
+require "spec_helper"
 
 describe RiCal::Component::Calendar do
-  
+
   context ".occurrences" do
-    
+
     context "all day weekly" do
-      
+
       subject {
         calendars = RiCal.parse_string rectify_ical <<-TEXT
           BEGIN:VCALENDAR
@@ -62,7 +62,7 @@ describe RiCal::Component::Calendar do
 TEXT
         calendars.first
       }
-    
+
       its(:events) { should have(2).items }
       its(:occurrences) { should have(7).items }
       it {
@@ -77,9 +77,9 @@ TEXT
         ])
       }
     end
-    
+
     context "weekly on wednesday with one instance on wednesday" do
-      
+
       subject {
         calendars = RiCal.parse_string rectify_ical <<-TEXT
           BEGIN:VCALENDAR
@@ -151,7 +151,7 @@ TEXT
   TEXT
         calendars.first
       }
-      
+
       its(:events) { should have(2).items }
       it("should return 2 occurrences for count: 2") {
         subject.occurrences(count: 2).should have(2).items
@@ -181,11 +181,11 @@ TEXT
           'Normaal op woensdag 12:00',
           'Nu op donderdag 11:00',
           'Normaal op woensdag 12:00',
-          'Normaal op woensdag 12:00'          
+          'Normaal op woensdag 12:00'
         ])
       }
     end
-    
+
     context "with starting" do
       subject {
         calendars = RiCal.parse_string rectify_ical <<-TEXT
@@ -266,9 +266,9 @@ TEXT
           2016-07-20T12:00:00+02:00
         ))
       }
-      
+
     end
-    
+
     context "complex" do
       subject {
         calendars = RiCal.parse_string rectify_ical <<-TEXT
@@ -412,7 +412,7 @@ TEXT
 TEXT
         calendars.first
       }
-      
+
       its(:events) { should have(5).items }
       it {
         subject.occurrences(count: 8).should have(8).items
@@ -449,12 +449,12 @@ TEXT
           2016-06-16T20:00:00+02:00
           2016-06-23T20:00:00+02:00
           2016-06-30T20:00:00+02:00
-          2016-07-06T18:00:00+02:00          
-          2016-07-21T20:00:00+02:00          
-          2016-07-28T20:00:00+02:00          
+          2016-07-06T18:00:00+02:00
+          2016-07-21T20:00:00+02:00
+          2016-07-28T20:00:00+02:00
         ))
       }
-      
+
       it {
         subject.occurrences(count: 6).map(&:recurrence_id).map(&:to_s).should eql([
           "2016-06-16T20:00:00+02:00",
@@ -476,16 +476,16 @@ TEXT
           ""
         ])
       }
-    
+
     end
-    
+
     context "3gk-kerktijden" do
       subject {
         cal = File.open(File.join(File.dirname(__FILE__), %w[.. .. sample_ical_files 3gk-kerktijden.ics])) do |file|
           RiCal.parse(file)
         end.first
       }
-      
+
       its(:events) { should have(22).items }
 
       it {
@@ -514,7 +514,7 @@ TEXT
           "2016-09-04T16:30:00+02:00  ds. W. A. Scheffer",
         ])
       }
-      
+
       it {
         subject.occurrences(starting: DateTime.parse('2016-07-24 10:00:00+02:00'), count: 4).map{ |o| [o.dtstart.to_s, o.summary].join(' ') }.should eql([
           "2016-07-24T10:00:00+02:00  dhr. N. Weeda",
@@ -527,7 +527,7 @@ TEXT
     end
 
   end
-  
+
   context "move all daily events to start of recurrence" do
     subject {
       calendars = RiCal.parse_string rectify_ical <<-TEXT
@@ -694,7 +694,7 @@ TEXT
        ))
     }
   end
-  
+
   context "master event vanishes because instance has same dtstart" do
     subject {
       calendars = RiCal.parse_string rectify_ical <<-TEXT
@@ -880,7 +880,7 @@ TEXT
        ))
     }
   end
-  
+
   context "move two events outside range" do
     subject {
       calendars = RiCal.parse_string rectify_ical <<-TEXT
@@ -1007,7 +1007,7 @@ TEXT
        ))
     }
   end
-  
+
   context "all recurring instances moved individually, one removed" do
     subject {
       calendars = RiCal.parse_string rectify_ical <<-TEXT
@@ -1194,7 +1194,7 @@ TEXT
        ))
     }
   end
-  
+
   context "with count <= 0" do
     subject {
       RiCal.Calendar do |cal|
@@ -1219,7 +1219,7 @@ TEXT
       subject.occurrences(count:10).should have(10).items
     }
   end
-  
+
   context "with first event changed in time" do
     subject {
       RiCal.parse_string(rectify_ical(<<-TEXT
@@ -1268,7 +1268,7 @@ TEXT
         TEXT
       )).first
     }
-    
+
     its(:events) { should have(2).items }
     it {
       subject.occurrences(

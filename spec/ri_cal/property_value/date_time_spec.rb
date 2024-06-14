@@ -1,6 +1,6 @@
 #- ©2009 Rick DeNatale, All rights reserved. Refer to the file README.txt for the license
 
-require File.join(File.dirname(__FILE__), %w[.. .. spec_helper])
+require "spec_helper"
 require 'tzinfo'
 
 describe RiCal::PropertyValue::DateTime do
@@ -363,7 +363,7 @@ END:VCALENDAR
           @it.value.should == "20090205T191711Z"
         end
       end
-      
+
       context "when the default timezone has been set to 'America/Chicago" do
         before(:each) do
           RiCal::PropertyValue::DateTime.stub(:default_tzid).and_return("America/Chicago")

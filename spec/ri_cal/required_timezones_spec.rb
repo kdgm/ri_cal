@@ -1,6 +1,6 @@
 #- ©2009 Rick DeNatale, All rights reserved. Refer to the file README.txt for the license
 
-require File.join(File.dirname(__FILE__), %w[.. spec_helper])
+require "spec_helper"
 
 require 'tzinfo'
 
@@ -52,11 +52,11 @@ describe RiCal::RequiredTimezones do
   before(:each) do
     @it = RiCal::RequiredTimezones.new
   end
-  
+
   def localtime_and_zone(date_time, tzid = "US/Eastern")
     [dt_prop(DateTime.parse(date_time), tzid), tzid]
   end
-  
+
 
   it "should create a RequiredTimezone for each new timezone presented" do
     @it.add_datetime(*localtime_and_zone("Mar 22, 2009 1:00"))

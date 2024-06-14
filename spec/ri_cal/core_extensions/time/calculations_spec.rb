@@ -1,6 +1,6 @@
 #- ©2009 Rick DeNatale, All rights reserved. Refer to the file README.txt for the license
 
-require File.join(File.dirname(__FILE__), %w[.. .. .. spec_helper])
+require "spec_helper"
 
 describe RiCal::CoreExtensions::Time::Calculations do
 
@@ -30,12 +30,12 @@ describe RiCal::CoreExtensions::Time::Calculations do
       Date.new(2003, 12, 31).iso_week_num(1).should == 1
     end
   end
-  
+
   describe ".iso_year" do
     it "should be 1999 for January 2 2000" do
       Date.new(2000, 1, 2).iso_year(1).should == 1999
     end
-    
+
     it "should be 1998 for December 29, 1997" do
       Date.new(1997, 12, 29).iso_year(1).should == 1998
     end

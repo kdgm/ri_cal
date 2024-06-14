@@ -1,13 +1,13 @@
 #- ©2009 Rick DeNatale, All rights reserved. Refer to the file README.txt for the license
 
-require File.join(File.dirname(__FILE__), %w[.. .. .. spec_helper])
+require "spec_helper"
 
 describe RiCal::PropertyValue::RecurrenceRule::RecurringYearDay do
 
   def set_it(which, rule=nil)
     @it = RiCal::PropertyValue::RecurrenceRule::RecurringYearDay.new(which, rule)
   end
-  
+
   def time_property(str)
     RiCal::PropertyValue.date_or_date_time(nil, :value => str)
   end

@@ -1,7 +1,7 @@
 #- ©2009 Rick DeNatale, All rights reserved. Refer to the file README.txt for the license
 
 require 'rubygems'
-require File.join(File.dirname(__FILE__), %w[.. spec_helper])
+require "spec_helper"
 
 describe "an event with unneeded by parts" do
   before(:each) do
@@ -52,27 +52,27 @@ END_STR
     @cal = RiCal.parse_string(rawdata).first
     @event = @cal.events.first
   end
-  
+
   it "should enumerate 10 events from July 13, 1940 to July 13, 1949 when count is 10" do
     @event.occurrences(:count => 10).map {|occurrence| occurrence.dtstart}.should == (0..9).map {|y|
       Date.parse("July 13, #{1940+y}")
       }
   end
-  
+
   # describe "with a dtstart outside the recurrence rule" do
   #   before(:each) do
   #     @event.dtstart = Date.parse("July 12, 1940")
   #   end
-  #   
+  #
   #   it "should enumerate 10 events first July 12, 1940, July 13, 1940, July 13, 1941 when count is 3" do
   #     @event.occurrences(:count => 3).map {|occurrence| occurrence.dtstart.to_s}.should == [
   #       Date.parse("July 12, 1940").to_s,
   #       Date.parse("July 13, 1940").to_s,
   #       Date.parse("July 13, 1941").to_s
   #     ]
-  #       
+  #
   #   end
-  # 
+  #
   # end
-  
+
 end

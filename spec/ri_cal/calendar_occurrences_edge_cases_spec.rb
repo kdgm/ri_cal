@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require File.join(File.dirname(__FILE__), %w[.. spec_helper])
+require "spec_helper"
 
 def generate_calendar(fixtures)
   RiCal.Calendar do
@@ -24,7 +24,7 @@ def generate_calendar(fixtures)
 end
 
 describe RiCal::Component::Calendar do
-  
+
   context "move first override before range" do
     let(:range) { { starting: DateTime.parse("2016-06-26"), count: 4 } }
     subject {
@@ -34,9 +34,9 @@ describe RiCal::Component::Calendar do
         }
       )
     }
-    
+
     its(:events) { should have(2).items }
-  
+
     it("should return four events from the 27th") {
       subject.occurrences(range).map(&:dtstart).map(&:to_s).should eql(%w(
         2016-06-27T16:30:00+00:00
@@ -46,7 +46,7 @@ describe RiCal::Component::Calendar do
       ))
     }
   end
-  
+
   context "move last event in range to a later date outside range/count" do
     let(:range) { { starting: DateTime.parse("2016-06-27"), count: 4 } }
     subject {
@@ -56,9 +56,9 @@ describe RiCal::Component::Calendar do
         }
       )
     }
-    
+
     its(:events) { should have(2).items }
-  
+
     it("should return events on 27/6, 28/6, 30/6 and 1/7") {
       subject.occurrences(range).map(&:dtstart).map(&:to_s).should eql(%w(
         2016-06-27T16:30:00+00:00
@@ -67,9 +67,9 @@ describe RiCal::Component::Calendar do
         2016-07-01T16:30:00+00:00
       ))
     }
-  
+
   end
-  
+
   context "move all but last event out of range" do
     let(:range) { { starting: DateTime.parse("2016-06-26"), before: DateTime.parse("2016-07-03") } }
     subject {
@@ -85,15 +85,15 @@ describe RiCal::Component::Calendar do
         }
       )
     }
-    
+
     its(:events) { should have(8).items }
-  
+
     it("should return the only event remaining in the range") {
       subject.occurrences(range).map(&:dtstart).map(&:to_s).should eql(["2016-07-02T12:00:00+00:00"])
     }
-  
+
   end
-  
+
   context "move overrides into empty range" do
     let(:range) { { starting: DateTime.parse("2016-06-26"), before: DateTime.parse("2016-07-03") } }
     subject {
@@ -109,9 +109,9 @@ describe RiCal::Component::Calendar do
         }
       )
     }
-  
+
     its(:events) { should have(8).items }
-  
+
     it("should return all events now in range") {
       subject.occurrences(range).map(&:dtstart).map(&:to_s).should eql(%w(
         2016-06-26T12:00:00+00:00
@@ -124,7 +124,7 @@ describe RiCal::Component::Calendar do
       ))
     }
   end
-  
+
   context "should distinguish coincident events" do
     let(:range) { { starting: DateTime.parse("2016-06-26"), count: 8 } }
     subject {
@@ -139,7 +139,7 @@ describe RiCal::Component::Calendar do
         },
       )
     }
-    
+
     its(:events) { should have(6).items }
 
     it("should return the only event remaining in the range") {
@@ -154,9 +154,9 @@ describe RiCal::Component::Calendar do
         2016-06-29T16:30:00+00:00
       ))
     }
-  
+
   end
-  
+
   context "should return correct next occurrence" do
     let(:range) { { starting: DateTime.parse("2016-06-26"), count: 1 } }
     subject {

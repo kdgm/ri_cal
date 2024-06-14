@@ -1,7 +1,7 @@
 # encoding: utf-8
 #- ©2009 Rick DeNatale, All rights reserved. Refer to the file README.txt for the license
 
-require File.join(File.dirname(__FILE__), %w[.. spec_helper.rb])
+require "spec_helper"
 
 def mock_enumerator(name, next_occurrence)
   double(name, :next_occurrence => next_occurrence, :bounded? => true, :empty? => false)
@@ -33,7 +33,7 @@ TEXT
    "19980313T090000Z",
    "19981113T090000Z",
    "19990813T090000Z",
-   "20001013T090000Z" 
+   "20001013T090000Z"
    ].map {|start| src = <<-TEXT
 BEGIN:VEVENT
 DTSTART:#{start}
@@ -73,10 +73,10 @@ TEXT
           result.map{|o|o.dtstart}.should == Fr13UnboundedZuluExpectedFive[0..2].map{|e| e.dtstart}
         end
       end
-      
+
       describe "with :overlapping specified" do
         it "should include occurrences which overlap" do
-          result = @it.occurrences(:overlapping => 
+          result = @it.occurrences(:overlapping =>
           [DateTime.parse("19981113T093000Z"), # occurrence[2].dtstart + 1/2 hour
            DateTime.parse("20001013T083000Z")]) # occurrence[4].dtstart - 1/2 hour
           result.map{|o|o.dtstart}.should == Fr13UnboundedZuluExpectedFive[2..3].map{|e| e.dtstart}
@@ -101,7 +101,7 @@ TEXT
       it "should enumerate no occurrences if dtstart is after :before" do
         @event.occurrences(:before => @event_start - 1).should be_empty
       end
-      
+
       #Bug reported by K.J. Wierenga
       it "should not raise a NoMethodError when specifying just the :count option" do
         lambda {

@@ -1,13 +1,13 @@
 # encoding: utf-8
 
-require File.join(File.dirname(__FILE__), %w[.. spec_helper])
+require "spec_helper"
 
 describe RiCal::Component::Calendar do
-  
+
   context ".occurrences" do
-    
+
     context "all day weekly" do
-      
+
       subject {
         calendars = RiCal.parse_string rectify_ical <<-TEXT
           BEGIN:VCALENDAR
@@ -867,11 +867,11 @@ TEXT
       }
 
       its(:events) { should have(55).items }
-      
+
       it {
         subject.occurrences(starting: Date.parse('20160825'), count: 6).should have(6).items
       }
-      
+
       it {
         subject.occurrences(starting: Date.parse('20160825'), count: 6).map{|o| [o.dtstart, o.summary].join(' ')}.should eql([
           "2016-08-28T10:00:00+02:00 Ger. Gemeente Kamperland 20160828T100000",
@@ -885,4 +885,3 @@ TEXT
     end
   end
 end
-
