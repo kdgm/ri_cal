@@ -38,14 +38,4 @@ namespace :performance do
       cat = '>>'
     end
   end
-
-  desc 'Run all profiles'
-  task :profile do
-    bench_script = File.join(File.dirname(__FILE__), '..', '/script', 'profile_subject')
-    FileList[File.join(File.dirname(__FILE__), '..', '/performance', '*')].each do |f|
-      cmd = "#{bench_script} #{File.basename(f)}"
-      puts cmd
-      `#{cmd}`
-    end
-  end
 end
