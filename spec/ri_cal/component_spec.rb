@@ -38,7 +38,7 @@ describe RiCal::Component do
         before(:each) do
           @cal =  RiCal.Calendar do
             event do
-              add_exdate 'US/Eastern', "19620220T144739"
+              add_exdate 'America/New_York', "19620220T144739"
             end
           end
           @event = @cal.events.first
@@ -50,7 +50,7 @@ describe RiCal::Component do
         end
 
         it "should have a property with the right ical representation" do
-          @prop.to_s.should == ";TZID=US/Eastern:19620220T144739"
+          @prop.to_s.should == ";TZID=America/New_York:19620220T144739"
         end
         
         context "its ruby_value" do
@@ -59,7 +59,7 @@ describe RiCal::Component do
           end
           
           it "should have the right tzid" do
-            @prop.ruby_value.first.tzid.should == "US/Eastern"
+            @prop.ruby_value.first.tzid.should == "America/New_York"
           end
         end
       end

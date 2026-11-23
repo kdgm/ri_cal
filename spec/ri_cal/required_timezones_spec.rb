@@ -53,15 +53,15 @@ describe RiCal::RequiredTimezones do
     @it = RiCal::RequiredTimezones.new
   end
   
-  def localtime_and_zone(date_time, tzid = "US/Eastern")
+  def localtime_and_zone(date_time, tzid = "America/New_York")
     [dt_prop(DateTime.parse(date_time), tzid), tzid]
   end
   
 
   it "should create a RequiredTimezone for each new timezone presented" do
     @it.add_datetime(*localtime_and_zone("Mar 22, 2009 1:00"))
-    @it.add_datetime(*localtime_and_zone("Apr 16, 2008 12:00", "US/Central"))
+    @it.add_datetime(*localtime_and_zone("Apr 16, 2008 12:00", "America/Chicago"))
     @it.add_datetime(*localtime_and_zone("Apr 16, 2008 12:00"))
-    @it.required_zones.map {|zone| zone.tzid}.sort.should == ["US/Central", "US/Eastern"]
+    @it.required_zones.map {|zone| zone.tzid}.sort.should == ["America/Chicago", "America/New_York"]
   end
 end
