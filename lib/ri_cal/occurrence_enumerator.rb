@@ -251,7 +251,18 @@ module RiCal
       end
       @dtstart_property = @dtstart_property.for_occurrence(occurrence_start)
       @dtend_property = (@dtend_property || @dtstart_property).for_occurrence(occurrence_end) if occurrence_end
+      keep_length_of_moved_start
       self
+    end
+
+    # The end of an occurrence is computed from its local start. When converting that start
+    # to UTC moves it forward out of an hour that a DST change skips, move the end by as
+    # much, so the occurrence keeps its length (02:30-03:15 becomes 03:30-04:15).
+    def keep_length_of_moved_start # :nodoc:
+      return unless @dtend_property && @dtstart_property.respond_to?(:skipped_seconds)
+
+      skipped_seconds = @dtstart_property.skipped_seconds
+      @dtend_property = @dtend_property.advance(:seconds => skipped_seconds) unless skipped_seconds.zero?
     end
 
     def recurrence(occurrence) # :nodoc:

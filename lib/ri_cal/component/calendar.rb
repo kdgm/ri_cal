@@ -130,19 +130,50 @@ module RiCal
             RiCal::PropertyValue::DateTime.new(calendar, :value => ruby_time.strftime("%Y%m%dT%H%M%SZ"))
         end
 
-        def local_to_utc(utc) #:nodoc:
-          utc_date_time(tzinfo.local_to_utc(utc.to_ri_cal_ruby_value))
+        # Converts a local date-time to UTC. A local time that a DST change skips, e.g. 02:30
+        # when the clocks jump from 02:00 to 03:00, moves forward by the skipped hour, as
+        # ActiveSupport does. A local time that a DST change repeats resolves to its first,
+        # daylight saving, occurrence unless TZInfo::Timezone.default_dst says otherwise.
+        def local_to_utc(local) #:nodoc:
+          local_time = local.to_ri_cal_ruby_value
+          utc_date_time(tzinfo.local_to_utc(existing_local_time(local_time), dst_for_ambiguous_local_time))
         end
 
         def utc_to_local(local) #:nodoc:
           local_date_time(tzinfo.utc_to_local(local.to_ri_cal_ruby_value), tzinfo.identifier)
         end
 
-
+        # The UTC offset that converts a local time to the same moment as #local_to_utc, so
+        # for a local time that a DST change skips, the offset from before the change.
         def rational_utc_offset(local)
-          RiCal.RationalOffset[tzinfo.period_for_local(local, true).utc_total_offset]
+          existing_local = existing_local_time(local)
+          offset_seconds = tzinfo.period_for_local(existing_local, dst_for_ambiguous_local_time).utc_total_offset
+          RiCal.RationalOffset[offset_seconds - seconds_between(local, existing_local)]
         end
 
+        # The number of seconds by which #local_to_utc moves a local date-time forward because
+        # a DST change skips its local time, or 0 for a local time that exists.
+        def skipped_seconds(local) #:nodoc:
+          local_time = local.to_ri_cal_ruby_value
+          seconds_between(local_time, existing_local_time(local_time))
+        end
+
+        private
+
+        ONE_HOUR = Rational(1, 24)
+
+        def existing_local_time(local_time)
+          local_time += ONE_HOUR while tzinfo.periods_for_local(local_time).empty?
+          local_time
+        end
+
+        def seconds_between(earlier_time, later_time)
+          ((later_time - earlier_time) * 86400).round
+        end
+
+        def dst_for_ambiguous_local_time
+          TZInfo::Timezone.default_dst.nil? ? true : TZInfo::Timezone.default_dst
+        end
       end
 
       def find_timezone(identifier)  #:nodoc:

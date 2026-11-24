@@ -56,6 +56,16 @@ module RiCal
           end
         end
 
+        # The number of seconds by which converting the receiver to UTC moves it forward
+        # because a DST change skips its local time, or 0.
+        def skipped_seconds #:nodoc:
+          if has_local_timezone? && timezone.respond_to?(:skipped_seconds)
+            timezone.skipped_seconds(self)
+          else
+            0
+          end
+        end
+
         def rational_tz_offset #:nodoc:
           if has_local_timezone?
             @rational_tz_offset ||= timezone.rational_utc_offset(@date_time_value.to_datetime)
