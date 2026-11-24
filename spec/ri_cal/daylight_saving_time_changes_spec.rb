@@ -41,7 +41,8 @@ describe "daylight saving time changes" do
   end
 
   describe "occurrences of a daily event" do
-    def daily_event(dtstart, dtend)
+    def daily_event(dtstart, dtend, exdate = nil)
+      exdate_line = exdate ? "EXDATE;TZID=Europe/Amsterdam:#{exdate}" : ""
       RiCal.parse_string(rectify_ical(<<-TEXT
           BEGIN:VCALENDAR
           PRODID;X-RICAL-TZSOURCE=TZINFO:-//com.denhaven2/NONSGML ri_cal gem//EN
@@ -52,6 +53,7 @@ describe "daylight saving time changes" do
           DTEND;TZID=Europe/Amsterdam;VALUE=DATE-TIME:#{dtend}
           UID:daily
           RRULE:FREQ=DAILY
+          #{exdate_line}
           END:VEVENT
           END:VCALENDAR
         TEXT
@@ -86,6 +88,20 @@ describe "daylight saving time changes" do
       event = daily_event("20261119T021000", "20261119T024000")
 
       expect(utc_times(event, DateTime.civil(2027, 3, 28))).to eq(["20270328T011000Z", "20270328T014000Z"])
+    end
+
+    it "excludes an occurrence that starts in the skipped hour by the time it moves to" do
+      event = daily_event("20261119T023000", "20261119T031500", "20270328T033000")
+      starts = event.occurrences(:starting => DateTime.civil(2027, 3, 27), :count => 2).map { |occurrence| utc_value(occurrence.dtstart) }
+
+      expect(starts).to eq(["20270327T013000Z", "20270329T003000Z"])
+    end
+
+    it "excludes an occurrence that starts in the skipped hour by its skipped time" do
+      event = daily_event("20261119T023000", "20261119T031500", "20270328T023000")
+      starts = event.occurrences(:starting => DateTime.civil(2027, 3, 27), :count => 2).map { |occurrence| utc_value(occurrence.dtstart) }
+
+      expect(starts).to eq(["20270327T013000Z", "20270329T003000Z"])
     end
 
     it "keeps an occurrence outside the skipped hour on the day of the change" do
