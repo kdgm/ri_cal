@@ -92,7 +92,18 @@ module RiCal
       # TODO: Need to research this, I beleive that this should also take the end time into account,
       #       but I need to research
       def exclusion_match?(occurrence, exclusion)
-        exclusion && (occurrence.dtstart == exclusion.dtstart)
+        exclusion && (occurrence.dtstart == exclusion.dtstart || moved_start_match?(occurrence.dtstart, exclusion.dtstart))
+      end
+
+      # A start in an hour that a DST change skips is moved forward out of it (02:30 becomes
+      # 03:30), so an exclusion may name the time it moved to.
+      def moved_start_match?(occurrence_start, exclusion_start)
+        # The enumerated start has no time zone finder yet; the component's DTSTART has.
+        start = @component.dtstart_property.for_occurrence(occurrence_start)
+        return false unless start.respond_to?(:skipped_seconds)
+
+        skipped_seconds = start.skipped_seconds
+        !skipped_seconds.zero? && start.advance(:seconds => skipped_seconds) == exclusion_start
       end
 
       # Also exclude occurrences before the :starting date_time
